@@ -1,24 +1,25 @@
-import logo from './logo.svg';
+import React from 'react';
+import { AuthProvider } from './providers/AuthProvider'
+import { FocusProvider } from './providers/FocusProvider'
 import './App.css';
+import './service/firebase';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Dashboard from './components/Dashboard';
+import Timer from './components/Timer'
 
 function App() {
+  const time = new Date();
+  time.setSeconds(time.getSeconds()+0); 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthProvider>
+      <Header />
+      <FocusProvider>
+        <Timer  expiryTimestamp={time}/>
+        <Dashboard />
+      </FocusProvider>
+      <Footer />
+    </AuthProvider>
   );
 }
 
