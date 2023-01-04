@@ -36,7 +36,14 @@ const Dashboard = () => {
         // もしログインしていたら、TODOの入力フォーム
         if(dig(currentUser,'currentUser','uid') ){
             dom=<Box sx={{width:"100%",maxWidth:360,margin:"auto",marginBottom:4,display:"flex",alignItems:"baseline",justifyContent:"center"}}>
-                <TextField variant="standard" placeholder="ToDoName" value = {inputName} sx={{marginRight:2}} onChange={(event) => setInputName(event.currentTarget.value)}/>
+                <TextField variant="standard" placeholder="ToDoName" 
+                value = {inputName} sx={{marginRight:2}} 
+                onChange={(event) => setInputName(event.currentTarget.value)}
+                onKeyPress={e => {
+                    if(e.key === 'Enter'){
+                        post();
+                    }
+                }}/>
                 <Button  variant="contained" size= "small" 
                 disabled = {inputName.length>0 ? false : true} sx = {{color: '#000'}} type="button" onClick={() => post()}>追加する</Button>
                 </Box>
